@@ -1989,7 +1989,7 @@ let downPress = false;
 let leftPress = false;
 let rightPress = false;
 
-// new lol
+// new for the fork
 let interactPress = false;
 let interactSecondaryPress = false;
 let aPress = false;
