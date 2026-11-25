@@ -1988,6 +1988,13 @@ let csPress = false;
 let downPress = false;
 let leftPress = false;
 let rightPress = false;
+
+// new lol
+let interactPress = false;
+let interactSecondaryPress = false;
+let aPress = false;
+let dPress = false;
+
 let recover = false;
 let recover2 = 0;
 let recoverTimer = 0;
@@ -7790,27 +7797,27 @@ function draw() {
 					if (recover) {
 						char[control].justChanged = 2;
 						if (recoverTimer == 0) {
-							if (_keysDown[37]) {
-								if (!leftPress) recoverCycle(HPRC2, -1);
-								leftPress = true;
-							} else leftPress = false;
-							if (_keysDown[39]) {
-								if (!rightPress) recoverCycle(HPRC2, 1);
-								rightPress = true;
-							} else rightPress = false;
+							if (_keysDown[65]) {
+								if (!aPress) recoverCycle(HPRC2, -1);
+								aPress = true;
+							} else aPress = false;
+							if (_keysDown[68]) {
+								if (!dPress) recoverCycle(HPRC2, 1);
+								dPress = true;
+							} else dPress = false;
 						}
 					} else {
 						if (cornerHangTimer == 0) {
-							if (_keysDown[37]) {
+							if (_keysDown[65]) {
 								char[control].moveHorizontal(-power);
-							} else if (_keysDown[39]) {
+							} else if (_keysDown[68]) {
 								char[control].moveHorizontal(power);
 							}
 						}
-						if (!_keysDown[37] && !_keysDown[39]) char[control].stopMoving();
+						if (!_keysDown[65] && !_keysDown[68]) char[control].stopMoving();
 					}
-					if (_keysDown[38]) {
-						if (!upPress) {
+					if (_keysDown[69] || _keysDown[87]) {
+						if (!interactPress) {
 							if (recover && recoverTimer == 0) {
 								recoverTimer = 60;
 								char[recover2].charState = 2;
@@ -7862,10 +7869,10 @@ function draw() {
 								}
 							}
 						}
-						upPress = true;
-					} else upPress = false;
-					if (_keysDown[40]) {
-						if (!downPress) {
+						interactPress = true;
+					} else interactPress = false;
+					if (_keysDown[83]) {
+						if (!interactSecondaryPress) {
 							if (char[control].carry) putDown(control);
 							else if (recover) {
 								if (recoverTimer == 0) {
@@ -7886,8 +7893,8 @@ function draw() {
 								recoverCycle(HPRC2, 0);
 							}
 						}
-						downPress = true;
-					} else downPress = false;
+						interactSecondaryPress = true;
+					} else interactSecondaryPress = false;
 					if (_keysDown[90]) {
 						if (!qPress && !recover) {
 							changeControl();
